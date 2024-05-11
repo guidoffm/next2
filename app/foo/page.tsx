@@ -1,5 +1,6 @@
 import UserTable from "@/app/foo/user-table";
 import { DaprClient } from "@dapr/dapr";
+import { User } from "./user-type";
 
 export default async function Page() {
     const daprClient = new DaprClient();
@@ -16,7 +17,7 @@ export default async function Page() {
             state: item.data.state,
             personId: item.data.person.id,
             personOrg: item.data.person.org
-        };
+        } as User;
     });
     return (
         <div>

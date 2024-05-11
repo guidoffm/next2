@@ -1,5 +1,8 @@
 'use client';
-export default function UserRow({ data }: { data: any }) {
+
+import { User } from "./user-type";
+
+export default function UserRow({ data }: { data: User }) {
 
     // console.log(data);
     return (

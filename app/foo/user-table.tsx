@@ -1,11 +1,15 @@
 'use client';
 
+import { User } from "./user-type";
 import UserRow from "./user-row";
-import { Key } from "react";
-
-export default function UserTable({data}: {data: any[]}) {
-
-    const users = data;
+import { Key, useEffect, useState } from "react";
+export default function UserTable({ data }: { data: User[] }) {
+    // introduce useEffect and useState
+    const [users, setUsers] = useState<any[]>([]);
+    useEffect(() => {
+        // fetch data
+        setUsers(data);
+    }, []);
 
     const handleHeaderClick = (columnName: string) => () => {
         console.log(`${columnName} header clicked`);
