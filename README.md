@@ -5,7 +5,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-npm run dev
+# npm run dev
+dapr run --app-id elysia1 -- env npx next dev --port 4200
 # or
 yarn dev
 # or
