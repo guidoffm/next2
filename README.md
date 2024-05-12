@@ -6,7 +6,7 @@ First, run the development server:
 
 ```bash
 # npm run dev
-dapr run --app-id elysia1 -- env npx next dev --port 4200
+dapr run --app-id elysia1 -- npx next dev --port 4200
 # or
 yarn dev
 # or
