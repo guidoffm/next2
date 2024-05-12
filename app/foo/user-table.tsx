@@ -2,7 +2,7 @@
 
 import { User } from "./user-type";
 import UserRow from "./user-row";
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './user-table.css';
 
 type SortOrder = 'asc' | 'desc' | 'none';
@@ -92,8 +92,8 @@ export default function UserTable({ data }: { data: User[] }) {
                     </tr >
                 </thead >
                 <tbody className="bg-white divide-gray-200">
-                    {(dataMyTable as User[]).map((user: User, index: Key) => (
-                        <UserRow key={index} data={user}></UserRow>
+                    {(dataMyTable as User[]).map((user: User) => (
+                        <UserRow data={user}></UserRow>
                     ))}
                 </tbody>
             </table >
