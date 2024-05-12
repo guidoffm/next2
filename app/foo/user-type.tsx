@@ -1,4 +1,3 @@
-'use client';
 export type User = {
     city: string;
     state: string;

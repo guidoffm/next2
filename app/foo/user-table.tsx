@@ -25,7 +25,7 @@ export default function UserTable({ data }: { data: User[] }) {
     }, [users, sortColumn, sortOrder]);
 
     function handleHeaderClick(columnName: UserProps) {
-        
+
         if (sortColumn === columnName) {
             switch (sortOrder) {
                 case 'none':
@@ -74,28 +74,32 @@ export default function UserTable({ data }: { data: User[] }) {
     }
 
     return (
-        <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-                <tr>
-                    <th className="sortable px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-1/4" scope="col" onClick={() => handleHeaderClick('city')}>
-                        {getSortSymbol('city')}City
-                    </th>
-                    <th className="sortable px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-1/4" scope="col" onClick={() => handleHeaderClick('state')}>
-                        {getSortSymbol('state')}State
-                    </th>
-                    <th className="sortable px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-1/4" scope="col" onClick={() => handleHeaderClick('personId')}>
-                        {getSortSymbol('personId')}Person ID
-                    </th>
-                    <th className="sortable px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer w-1/4" scope="col" onClick={() => handleHeaderClick('personOrg')}>
-                        {getSortSymbol('personOrg')}Person Org
-                    </th>
-                </tr >
-            </thead >
-            <tbody className="bg-white divide-y divide-gray-200">
-                {(dataMyTable as User[]).map((user: User, index: Key) => (
-                    <UserRow key={index} data={user}></UserRow>
-                ))}
-            </tbody>
-        </table >
+        dataMyTable.length > 0 ? (
+            <table className="min-w-full divide-gray-200">
+                <thead className="bg-gray-50">
+                    <tr>
+                        <th className="sortable px-6 py-3 text-left text-xs text-black uppercase tracking-wider cursor-pointer w-1/4 font-bold" scope="col" onClick={() => handleHeaderClick('city')}>
+                            {getSortSymbol('city')}City
+                        </th>
+                        <th className="sortable px-6 py-3 text-left text-xs text-black uppercase tracking-wider cursor-pointer w-1/4 font-bold" scope="col" onClick={() => handleHeaderClick('state')}>
+                            {getSortSymbol('state')}State
+                        </th>
+                        <th className="sortable px-6 py-3 text-left text-xs text-black uppercase tracking-wider cursor-pointer w-1/4 font-bold" scope="col" onClick={() => handleHeaderClick('personId')}>
+                            {getSortSymbol('personId')}Person ID
+                        </th>
+                        <th className="sortable px-6 py-3 text-left text-xs text-black uppercase tracking-wider cursor-pointer w-1/4 font-bold" scope="col" onClick={() => handleHeaderClick('personOrg')}>
+                            {getSortSymbol('personOrg')}Person Org
+                        </th>
+                    </tr >
+                </thead >
+                <tbody className="bg-white divide-gray-200">
+                    {(dataMyTable as User[]).map((user: User, index: Key) => (
+                        <UserRow key={index} data={user}></UserRow>
+                    ))}
+                </tbody>
+            </table >
+        ) : (
+            <div>Loading...</div>
+        )
     );
 }
