@@ -25,7 +25,7 @@ export default function UserTable({ data }: { data: User[] }) {
     }, [users, sortColumn, sortOrder]);
 
     function handleHeaderClick(columnName: UserProps) {
-        console.log(`${columnName} header clicked`);
+        
         if (sortColumn === columnName) {
             switch (sortOrder) {
                 case 'none':
