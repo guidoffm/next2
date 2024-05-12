@@ -5,14 +5,13 @@ import UserRow from "./user-row";
 import { Key, useEffect, useState } from "react";
 import './user-table.css';
 
-type UserProps = 'city' | 'state' | 'personId' | 'personOrg';
 type SortOrder = 'asc' | 'desc' | 'none';
 
 export default function UserTable({ data }: { data: User[] }) {
 
     const [users, setUsers] = useState<User[]>([]);
     const [dataMyTable, setdataMyTable] = useState<User[]>([]);
-    const [sortColumn, setSortColumn] = useState<UserProps>('city');
+    const [sortColumn, setSortColumn] = useState<keyof User>('city');
     const [sortOrder, setSortOrder] = useState<SortOrder>('none');
 
     useEffect(() => {
@@ -24,7 +23,7 @@ export default function UserTable({ data }: { data: User[] }) {
         setdataMyTable(sortedUsers as never[]);
     }, [users, sortColumn, sortOrder]);
 
-    function handleHeaderClick(columnName: UserProps) {
+    function handleHeaderClick(columnName: keyof User) {
 
         if (sortColumn === columnName) {
             switch (sortOrder) {
@@ -59,7 +58,7 @@ export default function UserTable({ data }: { data: User[] }) {
         });
     }
 
-    function getSortSymbol(columnName: UserProps) {
+    function getSortSymbol(columnName: keyof User) {
         if (sortColumn === columnName) {
             switch (sortOrder) {
                 case 'asc':
