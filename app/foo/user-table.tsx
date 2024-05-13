@@ -20,7 +20,7 @@ export default function UserTable({ data }: { data: User[] }) {
 
     useEffect(() => {
         const sortedUsers = getsortedUsers();
-        setdataMyTable(sortedUsers as never[]);
+        setdataMyTable(sortedUsers);
     }, [users, sortColumn, sortOrder]);
 
     function handleHeaderClick(columnName: keyof User) {
