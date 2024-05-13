@@ -92,8 +92,8 @@ export default function UserTable({ data }: { data: User[] }) {
                     </tr >
                 </thead >
                 <tbody className="bg-white divide-gray-200">
-                    {(dataMyTable as User[]).map((user: User) => (
-                        <UserRow data={user}></UserRow>
+                    {(dataMyTable as User[]).map((user: User, index: number) => (
+                        <UserRow key={index} data={user}></UserRow>
                     ))}
                 </tbody>
             </table >
