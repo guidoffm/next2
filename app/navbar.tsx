@@ -23,6 +23,9 @@ export default function Navbar() {
           <Link href="/foo" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
             Foo
           </Link>
+          <Link href="/form" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+            Form
+          </Link>
           <Link href="/about" className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
             Über uns
           </Link>
