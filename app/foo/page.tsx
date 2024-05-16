@@ -20,8 +20,8 @@ export default async function Page() {
         } as User;
     });
     return (
-        <div>
+        <main className="flex min-h-screen flex-col items-left justify-between p-24">
             <UserTable data={mappedData}></UserTable>
-        </div>
+        </main>
     )
 };
