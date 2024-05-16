@@ -2,7 +2,7 @@
 
 import { User } from "./user-type";
 import UserRow from "./user-row";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import './user-table.css';
 
 type SortOrder = 'asc' | 'desc' | 'none';
@@ -18,10 +18,25 @@ export default function UserTable({ data }: { data: User[] }) {
         setUsers(data);
     }, [data]);
 
+    const getsortedUsers = useCallback(() => {
+        if (sortOrder === 'none') {
+            return users;
+        }
+        return [...users].sort((a, b) => {
+            if (a[sortColumn] < b[sortColumn]) {
+                return sortOrder === 'asc' ? -1 : 1;
+            }
+            if (a[sortColumn] > b[sortColumn]) {
+                return sortOrder === 'asc' ? 1 : -1;
+            }
+            return 0;
+        });
+    }, [users, sortColumn, sortOrder]);
+
     useEffect(() => {
         const sortedUsers = getsortedUsers();
         setdataMyTable(sortedUsers);
-    }, [users, sortColumn, sortOrder]);
+    }, [users, sortColumn, sortOrder, getsortedUsers]);
 
     function handleHeaderClick(columnName: keyof User) {
 
@@ -43,21 +58,12 @@ export default function UserTable({ data }: { data: User[] }) {
         }
     };
 
-    function getsortedUsers() {
-        if (sortOrder === 'none') {
-            return users;
-        }
-        return [...users].sort((a, b) => {
-            if (a[sortColumn] < b[sortColumn]) {
-                return sortOrder === 'asc' ? -1 : 1;
-            }
-            if (a[sortColumn] > b[sortColumn]) {
-                return sortOrder === 'asc' ? 1 : -1;
-            }
-            return 0;
-        });
-    }
 
+
+    useEffect(() => {
+        const sortedUsers = getsortedUsers();
+        setdataMyTable(sortedUsers);
+    }, [getsortedUsers]);
     function getSortSymbol(columnName: keyof User) {
         if (sortColumn === columnName) {
             switch (sortOrder) {
