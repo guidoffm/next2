@@ -1,8 +1,10 @@
 import UserTable from "@/app/foo/user-table";
 import { DaprClient } from "@dapr/dapr";
 import { User } from "./user-type";
+import { unstable_noStore as noStore } from 'next/cache';
 
 export default async function Page() {
+    noStore();
     const daprClient = new DaprClient();
     const data = await daprClient.state.query('userstore2', {
         filter: {},

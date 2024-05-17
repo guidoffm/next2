@@ -13,6 +13,6 @@ RUN chown -R nextjs:nodejs /app
 USER nextjs
 RUN npm install
 COPY . .
-RUN npx next build --experimental-build-mode compile
+RUN npx next build # --experimental-build-mode compile
 EXPOSE 3000
 CMD ["npx", "next", "start"]
