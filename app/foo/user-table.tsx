@@ -64,6 +64,7 @@ export default function UserTable({ data }: { data: User[] }) {
         const sortedUsers = getsortedUsers();
         setdataMyTable(sortedUsers);
     }, [getsortedUsers]);
+    
     function getSortSymbol(columnName: keyof User) {
         if (sortColumn === columnName) {
             switch (sortOrder) {
