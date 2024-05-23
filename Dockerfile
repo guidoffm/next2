@@ -19,6 +19,14 @@ FROM base AS runner
 WORKDIR /app
 COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
-COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
 EXPOSE 3000
-CMD ["npm", "start"]
+
+ENV PORT 3000
+
+# server.js is created by next build from the standalone output
+# https://nextjs.org/docs/pages/api-reference/next-config-js/output
+CMD HOSTNAME="0.0.0.0" node server.js
+# CMD ["npm", "start"]
