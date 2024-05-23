@@ -6,13 +6,19 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-
-WORKDIR /app
-COPY package*.json ./
-RUN chown -R nextjs:nodejs /app
 USER nextjs
-RUN npm install
-COPY . .
-RUN npx next build # --experimental-build-mode compile
+
+FROM base AS builder
+WORKDIR /app
+COPY --chown=nextjs:nodejs package*.json ./
+RUN npm ci
+COPY --chown=nextjs:nodejs  . .
+RUN npx next build
+
+FROM base AS runner
+WORKDIR /app
+COPY --from=builder /app/package*.json ./
+RUN npm ci --omit=dev
+COPY --from=builder /app/.next ./.next
 EXPOSE 3000
-CMD ["npx", "next", "start"]
+CMD ["npm", "start"]
